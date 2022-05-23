@@ -25,106 +25,117 @@
 
   <body>
     <div class="container" style="width: 600px">
-      <header class="top">
-        <form id="search-form">
+      <div class="big-frame">
+        <header class="top">
+          <form id="search-form">
+            <div class="row">
+              <div class="col-7">
+                <input
+                  type="text"
+                  class="form-control"
+                  placeholder="Enter city"
+                  id="text-input"
+                  autocomplete="off"
+                />
+              </div>
+              <div class="col">
+                <input
+                  type="submit"
+                  class="form-control btn btn-outline-primary"
+                  value="Change"
+                />
+              </div>
+              <div class="col">
+                <button
+                  type="button"
+                  class="btn btn-outline-primary"
+                  id="location-button"
+                >
+                  📍
+                </button>
+              </div>
+            </div>
+          </form>
+
           <div class="row">
-            <div class="col-7">
-              <input
-                type="text"
-                class="form-control"
-                placeholder="Enter city"
-                id="text-input"
-                autocomplete="off"
-              />
+            <div class="col-6">
+              <h3>
+                <strong id="current-city"></strong>,<span id="country"></span>
+              </h3>
+            </div>
+          </div>
+        </header>
+
+        <div class="today grey-border">
+          <img src="style/icons/wi-day-sunny.svg" width="100px" />
+          <h2 id="description"></h2>
+          <p id="day-today"></p>
+          <p id="time-today"></p>
+          <h2 id="weather-today"></h2>
+          <hr />
+          <div class="row">
+            <div class="col right-line">
+              <img src="style/icons/wi-thermometer.svg" width="30px" />
+              <b id="feels-like"></b>
             </div>
             <div class="col">
-              <input
-                type="submit"
-                class="form-control btn btn-outline-primary"
-                value="Change"
-              />
+              <img src="style/icons/wi-stars.svg" width="30px" />
+              <b id="visibility"></b>
+            </div>
+          </div>
+          <hr />
+          <div class="row">
+            <div class="col right-line">
+              <img src="style/icons/wi-raindrop.svg" width="30px" />
+
+              <b id="humidity"></b>
             </div>
             <div class="col">
-              <button
-                type="button"
-                class="btn btn-outline-primary"
-                id="location-button"
-              >
-                📍
-              </button>
+              <img src="style/icons/wi-strong-wind.svg" width="30px" />
+              <b id="wind-speed"></b>
             </div>
           </div>
-        </form>
-
-        <div class="row">
-          <div class="col-6">
-            <h3>
-              <strong id="current-city"></strong>,<span id="country"></span>
-            </h3>
-          </div>
         </div>
-      </header>
 
-      <div class="today grey-border">
-        <img src="style/icons/wi-day-sunny.svg" width="100px" />
-        <h2 id="description"></h2>
-        <p id="day-today"></p>
-        <p id="time-today"></p>
-        <h2 id="weather-today"></h2>
-        <hr />
-        <div class="row">
-          <div class="col right-line">
-            <img src="style/icons/wi-thermometer.svg" width="30px" />
-            <b id="feels-like"></b>
-          </div>
-          <div class="col">
-            <img src="style/icons/wi-stars.svg" width="30px" />
-            <b id="visibility"></b>
-          </div>
-        </div>
-        <hr />
-        <div class="row">
-          <div class="col right-line">
-            <img src="style/icons/wi-raindrop.svg" width="30px" />
-
-            <b id="humidity"></b>
-          </div>
-          <div class="col">
-            <img src="style/icons/wi-strong-wind.svg" width="30px" />
-            <b id="wind-speed"></b>
+        <div class="future">
+          <div class="row mx-auto">
+            <div class="col grey-border future-day" style="width: 70px">
+              <p>MON</p>
+              <img src="style/icons/wi-day-sunny.svg" width="50px" />
+              <p>21 °C</p>
+            </div>
+            <div class="col grey-border future-day" style="width: 70px">
+              <p>TUE</p>
+              <img src="style/icons/wi-day-sunny-overcast.svg" width="50px" />
+              <p>21 °C</p>
+            </div>
+            <div class="col grey-border future-day" style="width: 70px">
+              <p>WED</p>
+              <img src="style/icons/wi-day-sunny-overcast.svg" width="50px" />
+              <p>19 °C</p>
+            </div>
+            <div class="col grey-border future-day" style="width: 70px">
+              <p>THU</p>
+              <img src="style/icons/wi-day-sunny.svg" width="50px" />
+              <p>24 °C</p>
+            </div>
+            <div class="col grey-border future-day" style="width: 70px">
+              <p>FRI</p>
+              <img src="style/icons/wi-day-sunny-overcast.svg" width="50px" />
+              <p>23 °C</p>
+            </div>
           </div>
         </div>
       </div>
 
-      <div class="future">
-        <div class="row mx-auto">
-          <div class="col grey-border future-day" style="width: 70px">
-            <p>MON</p>
-            <img src="style/icons/wi-day-sunny.svg" width="50px" />
-            <p>21 °C</p>
-          </div>
-          <div class="col grey-border future-day" style="width: 70px">
-            <p>TUE</p>
-            <img src="style/icons/wi-day-sunny-overcast.svg" width="50px" />
-            <p>21 °C</p>
-          </div>
-          <div class="col grey-border future-day" style="width: 70px">
-            <p>WED</p>
-            <img src="style/icons/wi-day-sunny-overcast.svg" width="50px" />
-            <p>19 °C</p>
-          </div>
-          <div class="col grey-border future-day" style="width: 70px">
-            <p>THU</p>
-            <img src="style/icons/wi-day-sunny.svg" width="50px" />
-            <p>24 °C</p>
-          </div>
-          <div class="col grey-border future-day" style="width: 70px">
-            <p>FRI</p>
-            <img src="style/icons/wi-day-sunny-overcast.svg" width="50px" />
-            <p>23 °C</p>
-          </div>
-        </div>
-      </div>
+      <p>
+        <small
+          ><a href="https://github.com/gusacci/weather-app" target="_blank"
+            >Open-source code,</a
+          >
+          by Anastasia Gusak</small
+        >
+      </p>
     </div>
     <script src="src/index.js"></script>
   </body>
