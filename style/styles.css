@@ -76,3 +76,18 @@ hr {
   margin-left: 20px;
   margin-right: 20px;
 }
+
+.minimum-temp {
+  color: #9d9fa4;
+  margin-bottom: 5px;
+}
+
+.max-temp {
+  margin-bottom: 5px;
+}
+
+.weekdays {
+  margin-bottom: 5px;
+  margin-top: 10px;
+  font-weight: 600;
+}
