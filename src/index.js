@@ -11,15 +11,46 @@ function showWeather(response) {
   let humidity = document.querySelector("#humidity");
   let windSpeed = document.querySelector("#wind-speed");
   let visibility = document.querySelector("#visibility");
+  let iconElement = document.querySelector("#icon");
+  let weatherDescription = document.querySelector("#description");
 
   temperatureToday.innerHTML = `${temperatureTodayValue}°C`;
   feelsLike.innerHTML = `Feels like: ${feelsLikeValue}°`;
   humidity.innerHTML = `Humidity: ${humidityValue}%`;
   windSpeed.innerHTML = `Wind: ${windSpeedValue} km/h`;
   visibility.innerHTML = `Visibility: ${visibilityValue} km`;
-  document.querySelector("#description").innerHTML =
-    response.data.weather[0].main;
+  weatherDescription.innerHTML = response.data.weather[0].main;
+
   document.querySelector("#country").innerHTML = response.data.sys.country;
+  iconElement.setAttribute("src", showIcon(weatherDescription.textContent));
+  iconElement.setAttribute("alt", response.data.weather[0].main);
+}
+
+function showIcon(iconDescription) {
+  let timePeriod = new Date().getHours();
+  if (iconDescription === "Clear") {
+    if (timePeriod > 5 && timePeriod < 20) {
+      return `style/icons/wi-day-sunny.svg`;
+    } else {
+      return `style/icons/wi-night-clear.svg`;
+    }
+  } else if (iconDescription === "Rain") {
+    return `style/icons/wi-day-rain.svg`;
+  } else if (iconDescription === "Snow") {
+    return `style/icons/wi-day-snow.svg`;
+  } else if (iconDescription === "Thunderstorm") {
+    return `style/icons/wi-day-thunderstorm.svg`;
+  } else if (iconDescription === "Mist") {
+    return `style/icons/wi-cloudy-windy.svg`;
+  } else if (iconDescription === "Clouds") {
+    if (timePeriod > 5 && timePeriod < 20) {
+      return `style/icons/wi-day-cloudy.svg`;
+    } else {
+      return `style/icons/wi-night-alt-cloudy.svg`;
+    }
+  } else {
+    return `style/icons/wi-cloudy.svg`;
+  }
 }
 
 function searchCity(city) {
@@ -47,6 +78,7 @@ function searchLocation(position) {
 function getLocation(event) {
   event.preventDefault();
   navigator.geolocation.getCurrentPosition(searchLocation);
+  console.log(position.coords.longitude);
 }
 
 let dayToday = document.querySelector("#day-today");
