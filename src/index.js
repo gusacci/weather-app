@@ -81,6 +81,30 @@ function getLocation(event) {
   console.log(position.coords.longitude);
 }
 
+function displayForecast() {
+  let forecastElement = document.querySelector("#forecast");
+
+  let days = ["Thu", "Fri", "Sat", "Sun", "Mon"];
+
+  let forecastHTML = `<div class="row">`;
+  days.forEach(function (day) {
+    forecastHTML =
+      forecastHTML +
+      `
+        <div class="col grey-border future-day" style="width: 70px">
+              <p class="weekdays">${day}</p>
+              <img src="style/icons/wi-day-sunny.svg" width="50px" />
+              <p class="max-temp">21 °C</p>
+              <p class="minimum-temp">19 °C</p>
+            </div>
+  `;
+  });
+
+  forecastHTML = forecastHTML + `</div>`;
+  forecastElement.innerHTML = forecastHTML;
+  console.log(forecastHTML);
+}
+
 let dayToday = document.querySelector("#day-today");
 
 let now = new Date();
@@ -138,3 +162,4 @@ let locationButton = document.querySelector("#location-button");
 locationButton.addEventListener("click", getLocation);
 
 searchCity("Paris");
+displayForecast();
