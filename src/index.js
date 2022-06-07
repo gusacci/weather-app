@@ -1,3 +1,9 @@
+function getForecast(coordinates) {
+  let apiKey = "95d97ccda682cdc0d4123003baefd848";
+  let apiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${coordinates.lat}&lon=${coordinates.lon}&appid=${apiKey}&units=metric`;
+  axios.get(apiUrl).then(displayForecast);
+}
+
 function showWeather(response) {
   document.querySelector("#current-city").innerHTML = response.data.name;
   let temperatureTodayValue = Math.round(response.data.main.temp);
@@ -24,6 +30,7 @@ function showWeather(response) {
   document.querySelector("#country").innerHTML = response.data.sys.country;
   iconElement.setAttribute("src", showIcon(weatherDescription.textContent));
   iconElement.setAttribute("alt", response.data.weather[0].main);
+  getForecast(response.data.coord);
 }
 
 function showIcon(iconDescription) {
@@ -78,31 +85,38 @@ function searchLocation(position) {
 function getLocation(event) {
   event.preventDefault();
   navigator.geolocation.getCurrentPosition(searchLocation);
-  console.log(position.coords.longitude);
 }
 
-function displayForecast() {
+function displayForecast(response) {
+  let forecast = response.data.daily;
+
   let forecastElement = document.querySelector("#forecast");
-
-  let days = ["Thu", "Fri", "Sat", "Sun", "Mon"];
-
   let forecastHTML = `<div class="row">`;
-  days.forEach(function (day) {
-    forecastHTML =
-      forecastHTML +
-      `
+
+  forecast.forEach(function (forecastDay, index) {
+    if (index < 5) {
+      forecastHTML =
+        forecastHTML +
+        `
         <div class="col grey-border future-day" style="width: 70px">
-              <p class="weekdays">${day}</p>
+              <p class="weekdays">${formatDay(forecastDay.dt)}</p>
               <img src="style/icons/wi-day-sunny.svg" width="50px" />
-              <p class="max-temp">21 °C</p>
-              <p class="minimum-temp">19 °C</p>
+              <p class="max-temp">${Math.round(forecastDay.temp.max)}°C</p>
+              <p class="minimum-temp">${Math.round(forecastDay.temp.min)}°C</p>
             </div>
   `;
+    }
   });
 
   forecastHTML = forecastHTML + `</div>`;
   forecastElement.innerHTML = forecastHTML;
-  console.log(forecastHTML);
+}
+
+function formatDay(timestamp) {
+  let date = new Date(timestamp * 1000);
+  let day = date.getDay();
+  let days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+  return days[day];
 }
 
 let dayToday = document.querySelector("#day-today");
@@ -162,4 +176,3 @@ let locationButton = document.querySelector("#location-button");
 locationButton.addEventListener("click", getLocation);
 
 searchCity("Paris");
-displayForecast();
