@@ -28,37 +28,41 @@ function showWeather(response) {
   weatherDescription.innerHTML = response.data.weather[0].main;
 
   document.querySelector("#country").innerHTML = response.data.sys.country;
-  iconElement.setAttribute("src", showIcon(weatherDescription.textContent));
+  iconElement.setAttribute(
+    "src",
+    `style/icons/${response.data.weather[0].main}.svg`
+  );
   iconElement.setAttribute("alt", response.data.weather[0].main);
   getForecast(response.data.coord);
+  console.log(response.data.weather[0]);
 }
 
-function showIcon(iconDescription) {
-  let timePeriod = new Date().getHours();
-  if (iconDescription === "Clear") {
-    if (timePeriod > 5 && timePeriod < 20) {
-      return `style/icons/wi-day-sunny.svg`;
-    } else {
-      return `style/icons/wi-night-clear.svg`;
-    }
-  } else if (iconDescription === "Rain") {
-    return `style/icons/wi-day-rain.svg`;
-  } else if (iconDescription === "Snow") {
-    return `style/icons/wi-day-snow.svg`;
-  } else if (iconDescription === "Thunderstorm") {
-    return `style/icons/wi-day-thunderstorm.svg`;
-  } else if (iconDescription === "Mist") {
-    return `style/icons/wi-cloudy-windy.svg`;
-  } else if (iconDescription === "Clouds") {
-    if (timePeriod > 5 && timePeriod < 20) {
-      return `style/icons/wi-day-cloudy.svg`;
-    } else {
-      return `style/icons/wi-night-alt-cloudy.svg`;
-    }
-  } else {
-    return `style/icons/wi-cloudy.svg`;
-  }
-}
+//function showIcon(iconDescription) {
+//let timePeriod = new Date().getHours();
+//if (iconDescription === "Clear") {
+//if (timePeriod > 5 && timePeriod < 20) {
+//return `style/icons/wi-day-sunny.svg`;
+//} else {
+//return `style/icons/wi-night-clear.svg`;
+//}
+//} else if (iconDescription === "Rain") {
+//return `style/icons/wi-day-rain.svg`;
+//} else if (iconDescription === "Snow") {
+//return `style/icons/wi-day-snow.svg`;
+//} else if (iconDescription === "Thunderstorm") {
+//return `style/icons/wi-day-thunderstorm.svg`;
+//} else if (iconDescription === "Mist") {
+//return `style/icons/wi-cloudy-windy.svg`;
+//} else if (iconDescription === "Clouds") {
+//if (timePeriod > 5 && timePeriod < 20) {
+//return `style/icons/wi-day-cloudy.svg`;
+//} else {
+//return `style/icons/wi-night-alt-cloudy.svg`;
+//}
+//} else {
+//  return `style/icons/wi-cloudy.svg`;
+//  }/
+//}//
 
 function searchCity(city) {
   let apiKey = "95d97ccda682cdc0d4123003baefd848";
@@ -100,7 +104,9 @@ function displayForecast(response) {
         `
         <div class="col grey-border future-day" style="width: 70px">
               <p class="weekdays">${formatDay(forecastDay.dt)}</p>
-              <img src="style/icons/wi-day-sunny.svg" width="50px" />
+              <img src="style/icons/${
+                forecastDay.weather[0].main
+              }.svg" width="50px" />
               <p class="max-temp">${Math.round(forecastDay.temp.max)}°C</p>
               <p class="minimum-temp">${Math.round(forecastDay.temp.min)}°C</p>
             </div>
